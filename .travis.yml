@@ -10,15 +10,15 @@ script:
   - docker run -e CI=true adamgradeq/react-test npm test
 
 after_success:
-  - docker build -t adamgradeq/multi-client ./client
-  - docker build -t adamgradeq/multi-nginx ./nginx
-  - docker build -t adamgradeq/multi-server ./server
-  - docker build -t adamgradeq/multi-worker ./worker
+  - docker build -t adamgradeq/multi-client:latest ./client
+  - docker build -t adamgradeq/multi-nginx:latest ./nginx
+  - docker build -t adamgradeq/multi-server:latest ./server
+  - docker build -t adamgradeq/multi-worker:latest ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push adamgradeq/multi-client
-  - docker push adamgradeq/multi-nginx
-  - docker push adamgradeq/multi-server
-  - docker push adamgradeq/multi-worker
+  - docker push adamgradeq/multi-client:latest
+  - docker push adamgradeq/multi-nginx:latest
+  - docker push adamgradeq/multi-server:latest
+  - docker push adamgradeq/multi-worker:latest
 
 deploy:
   provider: elasticbeanstalk
